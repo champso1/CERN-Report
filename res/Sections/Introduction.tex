@@ -1,0 +1,171 @@
+\section{Introduction}
+        The Leptoquark (LQ) is a proposed Beyond the Standard Model (BSM) particle that can couple to both leptons and quarks, thus allowing one to transform into another. Such a particle has been theorized for decades, where it was first found in many Grand Unification Theories (GUT) such as that by Georgi and Glashow in 1974 \cite{Georgi_1974}. Experimental interest in LQ's have been unremarkable; however, in recent years, due to the increasing energies of particle collisions at the LHC giving rise to newer discoveries, interest in the LQ search has increased, as they can provide explanations for a number of discrepencies between Standard Model (SM) predictions and experimental results. 
+        
+        Once such example is the decay of the $B$-meson \cite{Hiller_2014}, in which a flavor-changing neutral current process such as $b \rightarrow s \ell\ell$ deviates from Standard Model (SM) predictions involving Lepton Flavor Universality (LFU). Another example is that LQ's can radiatively generate Majorana neutrino masses \cite{Mahanta_2000}. Clearly, LQ's are very attractive sources of new physics.
+
+        \renewcommand{\arraystretch}{1.35}
+        \begin{table}[b]
+            \centering
+            \begin{tabular}{|c|c|c|c|}
+                \hline
+                $SU(3)_c \times SU(2)_L \times U(1)_Y$ & Symbol & Q-L Chirality & F \\ \hline
+                $(\bar{\bm{3}}, \bm{3}, 1/3)$ & $S_3$         & $LL$      & -2 \\ \hline
+                $(\bm{3}, \bm{2}, 7/6)$       & $R_2$         & $RL,\ LR$ & 0 \\ \hline
+                $(\bm{3}, \bm{2}, 1/6)$       & $\tilde{R_2}$ & $RL$      & 0 \\ \hline
+                $(\bar{\bm{3}}, \bm{1}, 4/3)$ & $\tilde{S_1}$ & $RR$      & -2 \\ \hline
+                $(\bar{\bm{3}}, \bm{1}, 1/3)$ & $S_1$         & $LL,\ RR$ & -2 \\ \hline
+            \end{tabular}
+            \caption{The representations of the scalar LQ multiplets under the standard model gauge group, the accepted symbols in the literature, the chirality types of the quark and lepton that the LQ couples to, and the fermion number of the LQ.}
+            \label{mulipletTable}
+        \end{table}
+        \renewcommand{\arraystretch}{1}
+
+        LQ's are found as either vector or scalar particles; we will focus solely on the scalar LQ's, as they have been studied more compared to the vector LQ's. There are five multiplets with varying representations under the standard model gauge group $SU(3)_c \times SU(2)_L \times U(1)_Y$ (see Table~\ref{mulipletTable}). Notably, all five are triplets under $SU(3)_c$, which is expected, as they couple to a quark and must therefore carry color. This also means that it is possible for there to be quark-quark interactions with a LQ, however this is exceedingly rare and will not be discussed here. The varying representations under $SU(2)_L$ along with each multiplet's hypercharge give rise to charged eigenstates of each multiplet; the $R_2$ leptoquark, for instance, has two charged eigenstates: $R_2^{+5/3}$ and $R_2^{+2/3}$. This comes from the Gell-Mann-Nishijima formula:
+
+        \begin{equation}
+            Q = I_3 + Y,
+        \end{equation}
+
+        where $Y$ is the hypercharge of the LQ and $I_3$ is the third component of the weak isospin of the LQ.
+
+        As a scalar particle, the LQ's couple to the quark and lepton via a Yukawa interaction, with the strength of the interaction determined by the magnitude of the coupling constant $y$. However, here, the Yukawa coupling is actually a $3\times3$ matrix. As an example, the $LQ-q-\ell$ interaction part of the $S_1$ Lagrangian is given here~\cite{Crivellin_2022}:
+
+        \begin{equation}
+            \mathcal{L}_{\text{int}} = Y_{1,ij}^{RR} \bar{u}_i^c \ell_j S_1^{\dagger} + Y_{1,ij}^{LL} \left(\bar{Q}_i^{c\intercal} i\sigma_2 L_j \right) S_1^{\dagger}
+        \end{equation}
+
+        Here, $Q_i$ and $L_i$ are left-handed quark and lepton $SU(2)$ doublets, and $u_i$ and $l_i$ are right-handed $SU(2)$ singlets. The superscripts $c$ and $intercal$ mean charge conjugation and transposition of the $SU(2)$ doublets, respectively. The parentheses in the second term denote contraction in $SU(2)$ space. Note that there are two terms, corresponding to the two different coupling types for the $S_1$ LQ, one for coupling of left-handed quarks to left-handed leptons, and one for coupling of right-handed quarks to right-handed leptons. Again, both couplings are in fact $3\times3$ matrices, where the indices correspond to the fermion generations that the LQ couples to. For instance, selecting $Y^{RR}_{11} \neq 1.0$ and all others to zero means that the LQ will couple only right-handed, first-generation quarks to right-handed, first generation leptons (which is the electron, since there are no right-handed neutrinos). In other words, the branching ratio $\beta(S_1 \rightarrow ue)=1.0$ (note that due to charge conservation, the $S_1$ LQ cannot decay into an electron and a down-type quark).
+
+
+        \subsection{Conventional LQ Production}
+
+            \begin{figure}[t]
+                \centering
+
+                \begin{tikzpicture}
+                    \begin{feynman}[large]
+                        \vertex (a);
+                        \vertex [right= of a,dot] (b) {};
+
+                        \vertex [above left =of a] (i1) {$q$};
+                        \vertex [below left =of a] (i2) {$g$};
+                        \vertex [right=5.25cm of i1] (f1) {$\ell$};
+                        \vertex [right=5.25cm of i2] (f2) {$LQ$};
+
+                        \diagram* {
+                            (i1) -- [fermion] (a) -- [fermion, edge label=$q$] (b) [dot] -- [fermion] (f1),
+                            (i2) -- [gluon] (a),
+                            (b) -- [scalar] (f2)
+                        };
+                    \end{feynman}
+                \end{tikzpicture}
+                \hspace*{5mm}
+                \begin{tikzpicture}
+                    \begin{feynman}[large]
+                        \vertex (aa);
+                        \vertex [below=5mm of aa] (a);
+                        \vertex [below=of aa, dot] (bb) {};
+                        \vertex [above=5mm of bb] (b);
+
+                        \vertex [above left =of a] (i1) {$q$};
+                        \vertex [below left =of b] (i2) {$\ell$};
+                        \vertex [above right=of a] (f1) {$g$};
+                        \vertex [below right=of b] (f2) {$LQ$};
+
+                        \diagram* {
+                            (i1) -- [anti fermion] (aa) -- [gluon] (f1),
+                            (i2) -- [fermion] (bb) -- [scalar] (f2),
+                            (aa) -- [anti fermion, edge label=$q$] (bb)
+                        };
+                        \vertex [below=1em of bb] (y2) {$y$};
+                    \end{feynman}
+                \end{tikzpicture}
+                \hspace*{5mm}
+                \begin{tikzpicture}
+                    \begin{feynman}[large]
+                        \vertex (aa);
+                        \vertex [below=5mm of aa] (a);
+                        \vertex [below=of aa, dot] (bb) {};
+                        \vertex [above=5mm of bb] (b);
+
+                        \vertex [above left =of a] (i1) {$\bar{q}$};
+                        \vertex [below left =of b] (i2) {$g$};
+                        \vertex [above right=of a] (f1) {$\bar{\ell}$};
+                        \vertex [below right=of b] (f2) {$LQ$};
+
+                        \diagram* {
+                            (i1) -- [fermion] (aa) -- [fermion] (f1),
+                            (i2) -- [fermion] (bb) -- [scalar] (f2),
+                            (aa) -- [scalar, edge label=$\overline{LQ}$] (bb)
+                        };
+                        \vertex [below=1em of bb] (y2) {$y$};
+                    \end{feynman}
+                \end{tikzpicture}
+                
+                \caption{Feynman diagrams for resonant LQ production at leading order.}
+                \label{resonantLQProdAtLO}
+            \end{figure}
+
+            LQ production at the LHC consists of a number of different mechanisms, largely categorized as either pair production or single/resonant production. Some examples of the latter are given in Figure~\ref{resonantLQProdAtLO}. There are two main contributions to normal pair production, as shown in Figure~\ref{conventionalLQPairProdAtLO}. This involves a QCD-driven component, as well as a Yukawa-driven component in which a lepton is exchanged in the t-channel. In both cases, the final state LQ's are charge conjugates of each other; in other words, an LQ and its anti-particle are produced. 
+
+            \begin{center}
+                \begin{figure}[t]
+                    \centering
+                    
+                    \begin{tikzpicture}
+                        \begin{feynman}[large]
+                            \vertex (m);
+                            \vertex [above left  = of m] (a) {$g$};
+                            \vertex [above right = of m] (b) {$\overline{LQ}$};
+                            \vertex [below left  = of m] (c) {$g$}; 
+                            \vertex [below right = of m] (d) {$LQ$};
+            
+                            \diagram* {
+                                (a) -- [gluon] (m),
+                                (c) -- [gluon] (m),
+                                (m) -- [scalar] (b),
+                                (m) -- [scalar] (d)
+                            };
+                        \end{feynman}
+                    \end{tikzpicture}
+                    \hspace*{5mm}
+                    \begin{tikzpicture}
+                        \begin{feynman}[large]
+                            \vertex (aa);
+                            \vertex [below=5mm of aa] (a);
+                            \vertex [below=of aa] (bb);
+                            \vertex [above=5mm of bb] (b);
+        
+                            \vertex [above left =of a] (i1) {$\bar{q}$};
+                            \vertex [below left =of b] (i2) {$q$};
+                            \vertex [above right=of a] (f1) {$\overline{LQ}$};
+                            \vertex [below right=of b] (f2) {$LQ$};
+        
+                            \diagram* {
+                                (i1) -- [anti fermion] (aa) [dot] -- [scalar] (f1),
+                                (i2) -- [fermion] (bb) [dot] -- [scalar] (f2),
+                                (aa) -- [anti fermion, edge label=$\ell$] (bb)
+                            };
+                            \vertex [above=0.5em of aa] (y1) {$y$};
+                            \vertex [below=0.5em of bb] (y2) {$y$};
+                        \end{feynman}
+                    \end{tikzpicture}
+                    
+                    \caption{Diagrams contributing to conventional LQ pair production at the LHC at leading order.}
+                    \label{conventionalLQPairProdAtLO}
+                \end{figure}
+            \end{center}
+
+            Based on the contributions to the single production cross section, we have that the amplitudes are proportional to only a single Yukawa coupling. So, the form of the total cross section is given by
+
+            \begin{equation}
+                \sigma_{\text{single}} = f(m_{\text{LQ}}) \abs{y_i}^2,
+            \end{equation}
+
+            where the function $f$ is dependent on the mass of the LQ. On the other hand, the pair production cross section takes a more complicated form:
+
+            \begin{equation}
+                \sigma_{\text{pair}} = f_{\text{QCD}}(m_{\text{LQ}}) + f_{\text{int}}(m_{\text{LQ}}) \abs{y_i}^2 + f_{\text{t-chan}}(m_{\text{LQ}}) \abs{y_i}^4. 
+            \end{equation}
+
+            In this case, we have the first term arising due to the QCD component, in which there are no fermions and thus no Yukawa coupling dependence. The third term is due to the t-channel diagram as shown before, and therefore that term depends quartic-ly on the Yukawa coupling, and the middle term is the interference between the two. Evidently, this cross section becomes dominated by the QCD contribution for small magnitudes of the Yukawa coupling, but for larger couplings, the quartic term in the pair production cross-section can begin to dominate. However, the mass dependence also plays a larger part in the pair production terms, meaning that the cross section drops off faster for higher LQ masses when compared to single production, hence, in the higher mass regime, pair production no longer dominates.
