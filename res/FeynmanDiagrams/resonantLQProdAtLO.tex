@@ -1,0 +1,66 @@
+\begin{figure}[t]
+    \centering
+
+    \begin{tikzpicture}
+        \begin{feynman}[large]
+            \vertex (a);
+            \vertex [right= of a,dot] (b) {};
+
+            \vertex [above left =of a] (i1) {$q$};
+            \vertex [below left =of a] (i2) {$g$};
+            \vertex [right=5.25cm of i1] (f1) {$\ell$};
+            \vertex [right=5.25cm of i2] (f2) {$LQ$};
+
+            \diagram* {
+                (i1) -- [fermion] (a) -- [fermion, edge label=$q$] (b) [dot] -- [fermion] (f1),
+                (i2) -- [gluon] (a),
+                (b) -- [scalar] (f2)
+            };
+        \end{feynman}
+    \end{tikzpicture}
+    \hspace*{5mm}
+    \begin{tikzpicture}
+        \begin{feynman}[large]
+            \vertex (aa);
+            \vertex [below=5mm of aa] (a);
+            \vertex [below=of aa, dot] (bb) {};
+            \vertex [above=5mm of bb] (b);
+
+            \vertex [above left =of a] (i1) {$q$};
+            \vertex [below left =of b] (i2) {$\ell$};
+            \vertex [above right=of a] (f1) {$g$};
+            \vertex [below right=of b] (f2) {$LQ$};
+
+            \diagram* {
+                (i1) -- [anti fermion] (aa) -- [gluon] (f1),
+                (i2) -- [fermion] (bb) -- [scalar] (f2),
+                (aa) -- [anti fermion, edge label=$q$] (bb)
+            };
+            \vertex [below=1em of bb] (y2) {$y$};
+        \end{feynman}
+    \end{tikzpicture}
+    \hspace*{5mm}
+    \begin{tikzpicture}
+        \begin{feynman}[large]
+            \vertex (aa);
+            \vertex [below=5mm of aa] (a);
+            \vertex [below=of aa, dot] (bb) {};
+            \vertex [above=5mm of bb] (b);
+
+            \vertex [above left =of a] (i1) {$\bar{q}$};
+            \vertex [below left =of b] (i2) {$g$};
+            \vertex [above right=of a] (f1) {$\bar{\ell}$};
+            \vertex [below right=of b] (f2) {$LQ$};
+
+            \diagram* {
+                (i1) -- [fermion] (aa) -- [fermion] (f1),
+                (i2) -- [fermion] (bb) -- [scalar] (f2),
+                (aa) -- [scalar, edge label=$\overline{LQ}$] (bb)
+            };
+            \vertex [below=1em of bb] (y2) {$y$};
+        \end{feynman}
+    \end{tikzpicture}
+    
+    \caption{Feynman diagrams for resonant LQ production at leading order.}
+    \label{resonantLQProdAtLO}
+\end{figure}

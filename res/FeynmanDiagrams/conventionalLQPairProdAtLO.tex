@@ -1,0 +1,47 @@
+\begin{center}
+    \begin{figure}[t]
+        \centering
+        
+        \begin{tikzpicture}
+            \begin{feynman}[large]
+                \vertex (m);
+                \vertex [above left  = of m] (a) {$g$};
+                \vertex [above right = of m] (b) {$\overline{LQ}$};
+                \vertex [below left  = of m] (c) {$g$}; 
+                \vertex [below right = of m] (d) {$LQ$};
+
+                \diagram* {
+                    (a) -- [gluon] (m),
+                    (c) -- [gluon] (m),
+                    (m) -- [scalar] (b),
+                    (m) -- [scalar] (d)
+                };
+            \end{feynman}
+        \end{tikzpicture}
+        \hspace*{5mm}
+        \begin{tikzpicture}
+            \begin{feynman}[large]
+                \vertex (aa);
+                \vertex [below=5mm of aa] (a);
+                \vertex [below=of aa] (bb);
+                \vertex [above=5mm of bb] (b);
+
+                \vertex [above left =of a] (i1) {$\bar{q}$};
+                \vertex [below left =of b] (i2) {$q$};
+                \vertex [above right=of a] (f1) {$\overline{LQ}$};
+                \vertex [below right=of b] (f2) {$LQ$};
+
+                \diagram* {
+                    (i1) -- [anti fermion] (aa) [dot] -- [scalar] (f1),
+                    (i2) -- [fermion] (bb) [dot] -- [scalar] (f2),
+                    (aa) -- [anti fermion, edge label=$\ell$] (bb)
+                };
+                \vertex [above=0.5em of aa] (y1) {$y$};
+                \vertex [below=0.5em of bb] (y2) {$y$};
+            \end{feynman}
+        \end{tikzpicture}
+        
+        \caption{Diagrams contributing to conventional LQ pair production at the LHC at leading order.}
+        \label{conventionalLQPairProdAtLO}
+    \end{figure}
+\end{center}

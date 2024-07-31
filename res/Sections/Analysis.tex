@@ -1,2 +1,23 @@
 \section{Analysis}
-    There are a number of SM processes that contribute also to the $2\ell\ell SS + 1\tau$ channel, including Higgs production, heavy boson ($W^{\pm},\ Z$) production, top quark production, and several others; the full table of background processes is given in Table~\ref{TABLE}. Because of this, we need to find a way to separate these ordinary SM ``backgrounds'' from our LQ pair production ``signal'', and the best way to achieve this is with machine learning. This is because there are dozens of relevent features that are present in the ntuples created from the event generation described in Section~\ref{methodology}, and many machine learning models have an edge over conventional fitting algorithms when it comes to many-dimensional scenarios such as this.
+    \renewcommand{\arraystretch}{1.2}
+    \begin{table}[t!]
+        \centering
+        \begin{tabular}{c|c}
+            Process & DSIDs \\ \hline
+            $LQ$        & 545824, 545825, 545826 \\ \hline
+            $t\bar{t}H$ & 346343 \\ \hline
+            $t\bar{t}W$ & 700168, 700205 \\ \hline
+            $t\bar{t}Z$ & 504330, 504334, 504342 \\ \hline
+            $t\bar{t}$  & 410470 \\ \hline 
+            $VV$        & 364253, 364254, 364255, 364283, 364284, 364287 \\ \hline 
+            Others      & 410560, 410408, 410646, 410647, 304014 \\
+        \end{tabular}
+        \caption{Table of all the DSID for the background and signal processes that are considered for the analysis. The ``Others'' category contains $tZ$, $WtZ$, $tW$, and $ttt$ samples.}
+        \label{signalAndBackgroundDSIDs}
+    \end{table}
+    \renewcommand{\arraystretch}{1}
+
+    There are a number of SM processes that contribute also to the $2\ell\ell SS + 1\tau$ channel, including Higgs production, heavy boson ($W^{\pm},\ Z$) production, top quark production, and several others; the full table of background (and signal) processes that are considered for the analysis is given in Table~\ref{signalAndBackgroundDSIDs}. Because of this, we need to find a way to separate these ordinary SM ``backgrounds'' from our LQ pair production ``signal'', and the best way to achieve this is with machine learning. This is because there are dozens of relevent features that are present in the ntuples created from the event generation described in Section~\ref{methodology}, and many machine learning models have an edge over conventional fitting algorithms when it comes to many-dimensional scenarios such as this.
+
+
+    

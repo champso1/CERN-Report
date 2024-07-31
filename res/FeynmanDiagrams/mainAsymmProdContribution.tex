@@ -1,0 +1,37 @@
+\begin{figure}[t]
+    \centering
+
+    \begin{tikzpicture}
+        \begin{feynman}[large]
+            \vertex (a) [dot] {};
+            \vertex [below=5mm of a] (aa);
+            \vertex [below=of a,dot] (b) {};
+            \vertex [above=5mm of b] (bb);
+
+            \vertex [above left =of aa] (i1) {$u$};
+            \vertex [below left =of bb] (i2) {$u$};
+            \vertex [above right=of aa] (f1);
+            \vertex [below right=of bb] (f2);
+
+
+            \vertex [right =of f1] (ia);
+            \vertex [right =of f2] (ib);
+            
+            \vertex [above=1.0em of ia] (fa1) {$\tau^-$};
+            \vertex [below=1.0em of ia] (fa2) {$t$};
+            \vertex [above=1.0em of ib] (fb1) {$\tau^+$};
+            \vertex [below=1.0em of ib] (fb2) {$t$};
+
+            \diagram* {
+                (i1) -- [fermion] (a) -- [fermion, edge label=$\ell$] (b) -- [anti fermion] (i2),
+                (a) -- [scalar, edge label'=$S_1^{-1/3}$] (f1) -- [fermion] (fa1),
+                (f1) -- [fermion] (fa2),
+                (b) -- [scalar, edge label=$R_2^{+5/3}$] (f2) -- [fermion] (fb1),
+                (f2) -- [fermion] (fb2),
+            };
+        \end{feynman}
+    \end{tikzpicture}
+    
+    \caption{The contribution to $pp \rightarrow S_1R_2 \rightarrow t\tau t\tau$ at leading order.}
+    \label{mainAsymmProdContribution}
+\end{figure}

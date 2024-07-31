@@ -1,104 +1,58 @@
 \section{Asymmetric Pair Production}
-        In a recent study, a novel method for pair producing LQ's that are not charge conjugates of each other, called ``asymmetric'' production, has been put forward~\cite{Dorsner_2023}, with the possibility that its cross sections are of similar or higher order than those of the conventional single and pair production methods mentioned in the previous section, for suitable masses and Yukawa coupling magnitudes. This novel method also comes with a few added benefits, such as the possibility for quark-quark initial states as opposed to quark-antiquark initial states, which is particularly preferrable for the LHC due to lessened PDF suppression.
+    In a recent study, a novel method for pair producing LQ's that are not charge conjugates of each other, called ``asymmetric'' production, has been put forward~\cite{Dorsner_2023}, with the possibility that its cross sections are of similar or higher order than those of the conventional single and pair production methods mentioned in the previous section, for suitable masses and Yukawa coupling magnitudes. This novel method also comes with a few added benefits, such as the possibility for quark-quark initial states as opposed to quark-antiquark initial states, which is particularly preferrable for the LHC due to lessened PDF suppression.
 
-        The main requirements to initiate this pair production is that the two leptoquarks in the final state couple to a lepton of the same chirality and flavor, and that their fermion numbers differ. As an example, the $R_2$ LQ can couple to the left-handed $SU(2)$ quark doublets and the right-handed $SU(2)$ lepton singlets (and vice-versa), and the $S_1$ LQ, as mentioned before, can couple to the both the right-handed $SU(2)$ quark and lepton singlets. Because of the similar lepton coupling, we have the ability to asymmetrically produce an $R_2$ and an $S_1$ LQ in the final state from a quark-quark initial state. The feynman diagram for an $S_1$/$R_2$ asymmetric production is given in Figure~\ref{s1r2FeynmanDiagram}.
+    The main requirements to initiate this pair production is that the two leptoquarks in the final state couple to a lepton of the same chirality and flavor, and that their fermion numbers differ. As an example, the $R_2$ LQ can couple to the left-handed $SU(2)$ quark doublets and the right-handed $SU(2)$ lepton singlets (and vice-versa), and the $S_1$ LQ, as mentioned before, can couple to the both the right-handed $SU(2)$ quark and lepton singlets. Because of the similar lepton coupling, we have the ability to asymmetrically produce an $R_2$ and an $S_1$ LQ in the final state from a quark-quark initial state. The feynman diagram for an $S_1$/$R_2$ asymmetric production is given in Figure~\ref{s1r2FeynmanDiagram}.
 
-        \begin{figure}[t]
+    \input{./res/FeynmanDiagrams/s1r2FeynmanDiagram.tex}
+
+    \subsection{The \texorpdfstring{$S_1$ and $R_2$}{S1 and R2} Case}
+
+        To closer examine the $S_1$/$R_2$ scheme, we can introduce the interaction terms of the Lagrangian for, say, coupling to right-handed leptons (which, again, excludes the neutrinos and leaves only the charged leptons):
+
+        \begin{equation}
+            \mathcal{L}_{\text{int}} = Y_{1,ij}^{RR} \bar{u}_i^c \ell_j S_1^{\dagger} + Y_{2,ij}^{LR} \left(\bar{Q}_i^{\intercal} \ell_j R_2\right) + \text{h.c.}
+        \end{equation}
+
+        Now, if we expand out the second term into the charge eigenstates of the $R_2$ multiplet, we get
+
+        \begin{equation}
+            \mathcal{L}_{\text{int}} = Y_{1,ij}^{RR} \bar{u}^c_{R,i} e_{R,j} S_1^{\dagger} + Y_{2,ij}^{LR} \bar{u}_{L,j} e_{R,i}  (R_2^{+5/3})^* + (Y_2 V_{\dagger})_{ij}^{LR}\bar{d}_{L,j} e_{R,i}  (R_2^{+2/3})^*,
+        \end{equation}
+
+        where now we have added chirality subscripts for the fermion states, LQ charges as superscripts which are in terms of the charge of the positron, and asterisks to represent charge conjugations of specific LQ eigenstates. Further, since the previous Lagrangian was in terms of the weak eigenstates of the fermions, when we induce spontaneous symmetry breaking, we need to introduce the Cabbibo-Kobayashi-Maskawa (CKM) matrix to relate the weak eigenstates of the down-type quarks to their mass eigenstates. Fortunately for us, the contents of this matrix is not important for our study, so, for simplicity, we will take it to be the identity. We will make the additional assumptions for simplicity that not only is there mass degeneracy within LQ multiplets, but also among multiplets; i.e. in every process, the LQ's will be assumed to have the same mass.
+
+
+
+    \subsection{The \texorpdfstring{$2\ell\ell SS+1\tau$}{2llSS+1tau} Channel}
+        In the interest of analysis of this new pair production method, we need to pick a channel to study. Our group specializes in the $2\ell\ell SS+1\tau$ channel, which says that there are two same-sign leptons and one hadronically decaying tau in the final state. One way we can analyze this channel is to choose our Yukawa couplings such that the LQ's we pair produce both decay into heavy particles, like taus and top quarks. In order to achieve this, we would be looking at having
+        
+        \begin{equation}
+            Y^{XR}_{i3} \neq 0,\ \text{where}\ X=L,R\ \text{and}\ i=1,2,3    
+        \end{equation}\label{yukawaMatrixElements}
+
+         This will allow the LQ to couple to only right-handed, third-generation leptons, or the tau. Since we also want a decay into a top quark, we need $Y^{XR}_{33} \neq 0$, but we will let the LQ couple to all quark generations to reduce PDF suppressions. Table~\ref{crossSections} contains the cross sections for various masses and Yukawa couplings.
+
+        \begin{table}[b]
             \centering
-            
-            \begin{tikzpicture}
-                \begin{feynman}[large]
-                    \vertex (aa) [dot] {};
-                    \vertex [below=5mm of aa] (a);
-                    \vertex [below=of aa,dot] (bb) {};
-                    \vertex [above=5mm of bb] (b);
+            \begin{tabular}{c|c|c|c}
+                 & $y=0.1$ & $y=0.5$ & $y=1.0$ \\ \hline
+                $m_{LQ}=1500\ \text{GeV}$ & & & \\ \hline
+                $m_{LQ}=2000\ \text{GeV}$ & & & \\ \hline
+                $m_{LQ}=2500\ \text{GeV}$ & & & \\
+            \end{tabular}
+            \caption{The cross sections for various mass and Yukawa coupling magnitudes. This corresponds to the Yukawa matrix elements chosen in Equation~\eqref{yukawaMatrixElements}.}
+            \label{crossSections}
+        \end{table}
 
-                    \vertex [above left =of a] (i1) {$q$};
-                    \vertex [below left =of b] (i2) {$q$};
-                    \vertex [above right=of a] (f1) {$R_2^{+5/3}$};
-                    \vertex [below right=of b] (f2) {$S_1^{-1/3}$};
+        \input{./res/FeynmanDiagrams/mainAsymmProdContribution.tex}
+        
+        The only way to asymmetrically pair-produce the $S_1$ and $R_2$ LQ's and have them decay into top quarks and taus is shown in Figure~\ref{mainAsymmProdContribution}, where we have two up-type quarks (which, in a 4 or 5-flavor scheme, means the up and charm quarks) in the initial state which exchange a lepton in the t-channel to pair produce the LQ's of interest. The $S_1$ LQ will subsequently decay into a tau and a top quark and the $R_2$ LQ will subsequently decay into an anti-tau and a top quark.
 
-                    \diagram* {
-                        (i1) -- [anti fermion] (aa) [dot] -- [scalar] (f1),
-                        (i2) -- [fermion] (bb) [dot] -- [scalar] (f2),
-                        (aa) -- [anti fermion, edge label=$\ell^+$] (bb)
-                    };
-                    \vertex [above=1em of aa] {$y$};
-                    \vertex [below=1em of bb] {$y$};
-                \end{feynman}
-            \end{tikzpicture}
+        One example decay chain for the taus and top quarks are:
 
-            \caption{One possible contribution towards the asymmetric pair production of the $S_1$ and $R_2$ LQ's. Notably, their charges and fermion numbers are different.}
-            \label{s1r2FeynmanDiagram}
-        \end{figure}
+        \begin{gather}
+            S_1 \rightarrow t\tau^- \rightarrow W^+ b \tau^- \rightarrow qqb\tau^- \\
+            R_2 \rightarrow t\tau^+ \rightarrow W^+ b \tau^+ \rightarrow \ell^+ \nu b \tau^+,
+        \end{gather}
 
-        \subsection{The \texorpdfstring{$S_1$ and $R_2$}{S1 and R2} Case}
-
-            To closer examine the $S_1$/$R_2$ scheme, we can introduce the interaction terms of the Lagrangian for, say, coupling to right-handed leptons (which, again, excludes the neutrinos and leaves only the charged leptons):
-
-            \begin{equation}
-                \mathcal{L}_{\text{int}} = Y_{1,ij}^{RR} \bar{u}_i^c \ell_j S_1^{\dagger} + Y_{2,ij}^{LR} \left(\bar{Q}_i^{\intercal} \ell_j R_2\right) + \text{h.c.}
-            \end{equation}
-
-            Now, if we expand out the second term into the charge eigenstates of the $R_2$ multiplet, we get
-
-            \begin{equation}
-                \mathcal{L}_{\text{int}} = Y_{1,ij}^{RR} \bar{u}^c_{R,i} e_{R,j} S_1^{\dagger} + Y_{2,ij}^{LR} \bar{u}_{L,j} e_{R,i}  (R_2^{+5/3})^* + (Y_2 V_{\dagger})_{ij}^{LR}\bar{d}_{L,j} e_{R,i}  (R_2^{+2/3})^*,
-            \end{equation}
-
-            where now we have added chirality subscripts for the fermion states, LQ charges as superscripts which are in terms of the charge of the positron, and asterisks to represent charge conjugations of specific LQ eigenstates. Further, since the previous Lagrangian was in terms of the weak eigenstates of the fermions, when we induce spontaneous symmetry breaking, we need to introduce the Cabbibo-Kobayashi-Maskawa (CKM) matrix to relate the weak eigenstates of the down-type quarks to their mass eigenstates. Fortunately for us, the contents of this matrix is not important for our study, so, for simplicity, we will take it to be the identity. We will make the additional assumptions for simplicity that not only is there mass degeneracy within LQ multiplets, but also among multiplets; i.e. in every process, the LQ's will be assumed to have the same mass.
-
-
-
-        \subsection{The \texorpdfstring{$2\ell\ell SS+1\tau$}{2llSS+1tau} Channel}
-            In the interest of analysis of this new pair production method, we need to pick a channel to study. Our group specializes in the $2\ell\ell SS+1\tau$ channel, which says that there are two same-sign leptons and one hadronically decaying tau in the final state. One way we can analyze this channel is to choose our Yukawa couplings such that the LQ's we pair produce both decay into heavy particles, like taus and top quarks. In order to achieve this, we would be looking at having $Y^{XR}_{i3} \neq 0$, where $X=L,R$ and $i=1,2,3$. This will allow the LQ to couple to only right-handed, third-generation leptons, or the tau. Since we also want a decay into a top quark, we need $Y^{XR}_{33} \neq 0$, but we will let the LQ couple to all quark generations to reduce PDF suppressions.
-
-
-            \begin{figure}[t]
-                \centering
-
-                \begin{tikzpicture}
-                    \begin{feynman}[large]
-                        \vertex (a) [dot] {};
-                        \vertex [below=5mm of a] (aa);
-                        \vertex [below=of a,dot] (b) {};
-                        \vertex [above=5mm of b] (bb);
-    
-                        \vertex [above left =of aa] (i1) {$u$};
-                        \vertex [below left =of bb] (i2) {$u$};
-                        \vertex [above right=of aa] (f1);
-                        \vertex [below right=of bb] (f2);
-    
-    
-                        \vertex [right =of f1] (ia);
-                        \vertex [right =of f2] (ib);
-                        
-                        \vertex [above=1.0em of ia] (fa1) {$\tau^-$};
-                        \vertex [below=1.0em of ia] (fa2) {$t$};
-                        \vertex [above=1.0em of ib] (fb1) {$\tau^+$};
-                        \vertex [below=1.0em of ib] (fb2) {$t$};
-    
-                        \diagram* {
-                            (i1) -- [fermion] (a) -- [fermion, edge label=$\ell$] (b) -- [anti fermion] (i2),
-                            (a) -- [scalar, edge label'=$S_1^{-1/3}$] (f1) -- [fermion] (fa1),
-                            (f1) -- [fermion] (fa2),
-                            (b) -- [scalar, edge label=$R_2^{+5/3}$] (f2) -- [fermion] (fb1),
-                            (f2) -- [fermion] (fb2),
-                        };
-                    \end{feynman}
-                \end{tikzpicture}
-                
-                \caption{The contribution to $pp \rightarrow S_1R_2 \rightarrow t\tau t\tau$ at leading order.}
-                \label{mainContribution}
-            \end{figure}
-            
-            The only way to asymmetrically pair-produce the $S_1$ and $R_2$ LQ's and have them decay into top quarks and taus is shown in Figure~\ref{mainContribution}, where we have two up-type quarks (which, in a 4 or 5-flavor scheme, means the up and charm quarks) in the initial state which exchange a lepton in the t-channel to pair produce the LQ's of interest. The $S_1$ LQ will subsequently decay into a tau and a top quark and the $R_2$ LQ will subsequently decay into an anti-tau and a top quark.
-
-            One example decay chain for the taus and top quarks are:
-
-            \begin{gather}
-                S_1 \rightarrow t\tau^- \rightarrow W^+ b \tau^- \rightarrow qqb\tau^- \\
-                R_2 \rightarrow t\tau^+ \rightarrow W^+ b \tau^+ \rightarrow \ell^+ \nu b \tau^+,
-            \end{gather}
-
-            which gives us a satisfactory final state for our analysis channel.
+        which gives us a satisfactory final state for our analysis channel.

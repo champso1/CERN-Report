@@ -1,0 +1,28 @@
+\begin{figure}[t]
+    \centering
+    
+    \begin{tikzpicture}
+        \begin{feynman}[large]
+            \vertex (aa) [dot] {};
+            \vertex [below=5mm of aa] (a);
+            \vertex [below=of aa,dot] (bb) {};
+            \vertex [above=5mm of bb] (b);
+
+            \vertex [above left =of a] (i1) {$q$};
+            \vertex [below left =of b] (i2) {$q$};
+            \vertex [above right=of a] (f1) {$R_2^{+5/3}$};
+            \vertex [below right=of b] (f2) {$S_1^{-1/3}$};
+
+            \diagram* {
+                (i1) -- [anti fermion] (aa) [dot] -- [scalar] (f1),
+                (i2) -- [fermion] (bb) [dot] -- [scalar] (f2),
+                (aa) -- [anti fermion, edge label=$\ell^+$] (bb)
+            };
+            \vertex [above=1em of aa] {$y$};
+            \vertex [below=1em of bb] {$y$};
+        \end{feynman}
+    \end{tikzpicture}
+
+    \caption{One possible contribution towards the asymmetric pair production of the $S_1$ and $R_2$ LQ's. Notably, their charges and fermion numbers are different.}
+    \label{s1r2FeynmanDiagram}
+\end{figure}
