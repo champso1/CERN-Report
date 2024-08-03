@@ -1,7 +1,7 @@
 \section{Introduction}
-    The Leptoquark (LQ) is a proposed Beyond the Standard Model (BSM) particle that can couple to both leptons and quarks, thus allowing one to transform into another. Such a particle has been theorized for decades, where it was first found in many Grand Unification Theories (GUT) such as that by Georgi and Glashow in 1974 \cite{Georgi_1974}. Experimental interest in LQ's have been unremarkable; however, in recent years, due to the increasing energies of particle collisions at the LHC giving rise to newer discoveries, interest in the LQ search has increased, as they can provide explanations for a number of discrepencies between Standard Model (SM) predictions and experimental results. 
+    The Leptoquark (LQ) is a proposed Beyond the Standard Model (BSM) particle that can couple to both leptons and quarks, thus allowing one to transform into another. Such a particle has been theorized for decades, where it was first found in many Grand Unification Theories (GUT) such as that by Georgi and Glashow in 1974 \cite{Georgi_1974}. Experimental interest in LQ's has been generally unremarkable; however, in recent years, due to the increasing energies of particle collisions at the LHC giving rise to newer discoveries, interest in the LQ search has increased, as they can provide explanations for a number of discrepencies between Standard Model (SM) predictions and experimental results. 
     
-    Once such example is the decay of the $B$-meson \cite{Hiller_2014}, in which a flavor-changing neutral current process such as $b \rightarrow s \ell\ell$ deviates from Standard Model (SM) predictions involving Lepton Flavor Universality (LFU). Another example is that LQ's can radiatively generate Majorana neutrino masses \cite{Mahanta_2000}. Clearly, LQ's are very attractive sources of new physics.
+    Once such example is the decay of the $B$-meson \cite{Hiller_2014}, in which a flavor-changing neutral current process such as $b \rightarrow s \ell\ell$ deviates from Standard Model (SM) predictions, signalling a violation of Lepton Flavor Universality (LFU). Another example is that LQ's can radiatively generate Majorana neutrino masses \cite{Mahanta_2000}. Clearly, LQ's are very attractive sources of new physics.
 
     \renewcommand{\arraystretch}{1.35}
     \begin{table}[b]
@@ -20,7 +20,7 @@
     \end{table}
     \renewcommand{\arraystretch}{1}
 
-    LQ's are found as either vector or scalar particles; we will focus solely on the scalar LQ's, as they have been studied more compared to the vector LQ's. There are five multiplets with varying representations under the standard model gauge group $SU(3)_c \times SU(2)_L \times U(1)_Y$ (see Table~\ref{mulipletTable}). Notably, all five are triplets under $SU(3)_c$, which is expected, as they couple to a quark and must therefore carry color. This also means that it is possible for there to be quark-quark interactions with a LQ, however this is exceedingly rare and will not be discussed here. The varying representations under $SU(2)_L$ along with each multiplet's hypercharge give rise to charged eigenstates of each multiplet; the $R_2$ leptoquark, for instance, has two charged eigenstates: $R_2^{+5/3}$ and $R_2^{+2/3}$. This comes from the Gell-Mann-Nishijima formula:
+    LQ's are found as either vector or scalar particles; we will focus solely on the scalar LQ's, as the novel pair production method we will introduce in this report has not been studied for the vector LQ's. There are five multiplets with varying representations under the standard model gauge group $SU(3)_c \times SU(2)_L \times U(1)_Y$, as shown in Table~\ref{mulipletTable}. Notably, all five are triplets under $SU(3)_c$, which is expected, as they couple to a quark and must therefore carry color. This also means that it is possible for there to be quark-quark interactions with a LQ, however we will not consider this for a similar reason as to why we aren't considering vector LQ's. Each multiplet has a number of charged eigenstates; the $R_2$ leptoquark, for instance, has two charged eigenstates: $R_2^{+5/3}$ and $R_2^{+2/3}$. This comes from the Gell-Mann-Nishijima formula, in our normalization, given by:
 
     \begin{equation}
         Q = I_3 + Y,
@@ -28,23 +28,20 @@
 
     where $Y$ is the hypercharge of the LQ and $I_3$ is the third component of the weak isospin of the LQ.
 
-    As a scalar particle, the LQ's couple to the quark and lepton via a Yukawa interaction, with the strength of the interaction determined by the magnitude of the coupling constant $y$. However, here, the Yukawa coupling is actually a $3\times3$ matrix. As an example, the $LQ-q-\ell$ interaction part of the $S_1$ Lagrangian is given here~\cite{Crivellin_2022}:
+    As a scalar particle, the LQ's couple to the quark and lepton via a Yukawa interaction, with the strength of the interaction determined by the magnitude of the coupling constant $y$. However, here, the Yukawa coupling is actually a $3\times3$ matrix, whose indices correspond to the fermion generation. As an example, the $LQ-q-\ell$ interaction part of the $S_1$ Lagrangian is given here~\cite{Crivellin_2022}:
 
     \begin{equation}
         \mathcal{L}_{\text{int}} = Y_{1,ij}^{RR} \bar{u}_i^c \ell_j S_1^{\dagger} + Y_{1,ij}^{LL} \left(\bar{Q}_i^{c\intercal} i\sigma_2 L_j \right) S_1^{\dagger}
     \end{equation}
 
-    Here, $Q_i$ and $L_i$ are left-handed quark and lepton $SU(2)$ doublets, and $u_i$ and $l_i$ are right-handed $SU(2)$ singlets. The superscripts $c$ and $intercal$ mean charge conjugation and transposition of the $SU(2)$ doublets, respectively. The parentheses in the second term denote contraction in $SU(2)$ space. Note that there are two terms, corresponding to the two different coupling types for the $S_1$ LQ, one for coupling of left-handed quarks to left-handed leptons, and one for coupling of right-handed quarks to right-handed leptons. Again, both couplings are in fact $3\times3$ matrices, where the indices correspond to the fermion generations that the LQ couples to. For instance, selecting $Y^{RR}_{11} \neq 1.0$ and all others to zero means that the LQ will couple only right-handed, first-generation quarks to right-handed, first generation leptons (which is the electron, since there are no right-handed neutrinos). In other words, the branching ratio $\beta(S_1 \rightarrow ue)=1.0$ (note that due to charge conservation, the $S_1$ LQ cannot decay into an electron and a down-type quark).
+    Here, $Q_i$ and $L_i$ are left-handed quark and lepton $SU(2)$ doublets, and $u_i$ and $\ell_i$ are right-handed $SU(2)$ singlets. The superscripts $c$ and $\intercal$ mean charge conjugation and transposition of the $SU(2)$ doublets, respectively. The parentheses in the second term denote contraction in $SU(2)$ space. Note that there are two terms, corresponding to the two different coupling types for the $S_1$ LQ, one for coupling of left-handed quarks to left-handed leptons, and one for coupling of right-handed quarks to right-handed leptons. If we were to, for instance, select $Y^{RR}_{11} \neq 1.0$ and all others to zero, then the LQ would couple only right-handed, first-generation quarks to right-handed, first generation leptons (which is the electron, since there are no right-handed neutrinos). In other words, the branching ratio $\beta(S_1 \rightarrow ue)=1.0$ (note that due to charge conservation, the $S_1$ LQ cannot decay into an electron and a down-type quark).
 
 
     \subsection{Conventional LQ Production}
-
-        \input{./res/FeynmanDiagrams/resonantLQProdAtLO.tex}
-
-        LQ production at the LHC consists of a number of different mechanisms, largely categorized as either pair production or single/resonant production. Some examples of the latter are given in Figure~\ref{resonantLQProdAtLO}. There are two main contributions to normal pair production, as shown in Figure~\ref{conventionalLQPairProdAtLO}. This involves a QCD-driven component, as well as a Yukawa-driven component in which a lepton is exchanged in the t-channel. In both cases, the final state LQ's are charge conjugates of each other; in other words, an LQ and its anti-particle are produced. 
-
+        LQ production at the LHC consists of a number of different mechanisms, largely categorized as either pair production or single/resonant production. There are two main contributions to normal pair production, as shown in Figure~\ref{conventionalLQPairProdAtLO}. This involves a QCD-driven component, as well as a Yukawa-driven component in which a lepton is exchanged in the t-channel. Note that in both cases, the final state LQ's are charge conjugates of each other; in other words, an LQ and its anti-particle are produced. 
+        %
         \input{./res/FeynmanDiagrams/conventionalLQPairProdAtLO.tex}
-
+        
         Based on the contributions to the single production cross section, we have that the amplitudes are proportional to only a single Yukawa coupling. So, the form of the total cross section is given by
 
         \begin{equation}
