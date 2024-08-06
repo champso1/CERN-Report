@@ -1,0 +1,20 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Conventional LQ Production}{3}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Asymmetric Pair Production}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}The $S_1$ and $R_2$ Case}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}The $2\ell \ell SS+1\tau $ Channel}{4}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Methodology}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Testing and Production of Validation Plots}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Approval and Submission to the Grid}{6}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Analysis}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}$t\bar {t}H$ Analysis}{8}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Pre-fit Yields and Small Ntuples}{8}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Model Training and Friend Ntuples}{9}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Probability Distributions and Statistical Uncertainties}{10}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}LQ Analysis}{10}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Discussion}{10}{section.5}%
+\contentsline {section}{\numberline {A}List of DSIDs Considered for Analysis}{12}{appendix.A}%
+\contentsline {section}{\numberline {B}Additional Region Plots}{13}{appendix.B}%
+\contentsline {section}{\numberline {C}Rel.21 Branches Missing/Renamed from Rel.22}{14}{appendix.C}%
+\contentsline {subsection}{\numberline {C.1}Pre-Selection Criteria}{14}{subsection.C.1}%
+\contentsline {subsection}{\numberline {C.2}Training Features}{14}{subsection.C.2}%
