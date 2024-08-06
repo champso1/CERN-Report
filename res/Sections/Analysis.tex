@@ -1,20 +1,18 @@
 \section{Analysis}
-    There are a number of SM processes that contribute also to the $2\ell\ell SS + 1\tau$ channel, including Higgs production, heavy boson ($W^{\pm},\ Z$) production, top quark production, and several others; the full table of background (and signal) processes that are considered for the analysis is given in Table~\ref{DSIDs}. Because of this, we need to find a way to separate these ordinary SM ``backgrounds'' from our LQ pair production ``signal'', and the best way to achieve this is with machine learning. This is because there are dozens of relevent features that are present in the ntuples created from the event generation described in Section~\ref{methodology}, and many machine learning models have an edge over conventional fitting algorithms when it comes to many-dimensional scenarios such as this.
+    There are a number of SM processes that contribute also to the $2\ell\ell SS + 1\tau$ channel, including Higgs production, heavy boson ($W^{\pm},\ Z$) production, top quark production, and several others; the full table of background (and signal) processes that are considered for the analysis is given in Table~\ref{signalAndBackgroundDSIDs} in Appendix~\ref{DSIDs}. Because of this, we need to find a way to separate these ordinary SM ``backgrounds'' from our LQ pair production ``signal'', and the best way to achieve this is with machine learning. This is because there are dozens of relevent features that are present in the ntuples created from the event generation described in Section~\ref{methodology}, and many machine learning models have an edge over conventional fitting algorithms when it comes to many-dimensional scenarios such as this.
 
-    This process is done in a number of different ways based on the experiment -- we will list our steps here. First, we produce so-called ``small'' ntuples, which are created by skimming through the terabytes of raw background and signal ntuples and applying a selection criteria relevent for the $2\ell\ell SS + 1\tau$ channel to remove events that are not interesting. This is done to make subsequent steps significantly faster and more efficient due to a highly reduced event count and file size.\footnote{Ordinarily, the small ntuple step is not done at the very beginning; the subsequent steps take a long time, but not a ridiculously long time, and statistics will be better with larger sample sizes. However, for the purposes of the summer student timeline, this step was expedited so that the analysis can be done in a reasonable time.} Then, the ROOT files are converted to numpy files which can then be read by PyTorch to train a machine learning model. After the machine learning model is trained, we can then plug the small ntuples into the model to create so-called ``friend'' ntuples, which are then loaded into TRExFitter to produce statistical analyses.
+    This process is done in a number of different ways based on the experiment -- we will list our steps here. First, we make some preliminary plots/tables using TRExFitter to show the raw number of events with and without weighting/selection criteria. Both the weighting and selection criteria serve to isolate only those events which are most interesting to our signal and analysis channel. Then, we produce so-called ``small'' ntuples which use the same selection criteria to slim down the raw ntuples and make further analysis quicker. At the same time, we take the full dataset and transform it to numpy arrays so that it can be used to train a machine learning model. After the model is trained, the small ntuples are fed through it to generate probabilities in what are called ``friend'' ntuples. Lastly, TRExFitter can generate full distributions and other statistical measures using the friend-ntuples.
+    
 
-    \subsection{Testing}
-        Before this analysis was run on the new LQ signal samples, we chose to run the analysis with some release 22 conventional LQ production samples as the signal in order to test that the pipeline was working. This involved a lot of trail and error, as the code that was provided to do the analysis had been made for release 21 samples, and there are considerable differences between the two. For instance, a non-neglible portion of the branches in the ntuples had been completely removed or renamed (a list of some of the more important features from Rel.21 that are not present in Rel.22 is given in Appendix~\ref{MissingBranches}).
+    
 
-        Despite these challenges, we were able to get some preliminary results. Please note that the output from these analysis is to be taken with a grain of salt; many of the aforementioned missing branches were completely deleted from all selection criteria, and there were some samples from Rel.21 that were not reproduced in Rel.22, for reasons such as that certain generators were found to be better than others for certain processes, leading to the corresponding samples being discontinued.
-
-
-        \begin{figure}[t]
-            \centering
-            
-            \caption{The raw number of events for each background and signal sample.}
-            \label{PreFitPlots}
-        \end{figure}
+    With the selection criteria established, we can produce so-called ``small'' ntuples, which are created by skimming through the dozens of gigabytes of raw background and signal ntuples and applying the selection to remove uninteresting events. This is done to make subsequent steps significantly faster and more efficient due to a highly reduced event count and file size. 
+    
+    Then, the ROOT files are converted to numpy files which can then be read by PyTorch to train a machine learning model. In this stage we select more features we want to train our model on. As with the previous steps there were a large number of features that were either missing or renamed. A list of the missing variables is give in Appendix~\ref{trainMissingFeatures}
+    
+    After the machine learning model is trained, we can then plug the small ntuples into the model to create so-called ``friend'' ntuples, which are then loaded into TRExFitter to produce statistical analyses.
 
 
-        Figure~\ref{PreFitPlots} contains the samples/yields for the background and signal processes with and without a $2\ell\ell SS + 1\tau$ selection criteria.
+
+    \import{./res/Sections/Analysis}{Analysis_ttH.tex}
+    \import{./res/Sections/Analysis}{Analysis_LQ.tex}

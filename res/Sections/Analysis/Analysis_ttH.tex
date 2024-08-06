@@ -1,0 +1,68 @@
+\subsection{\texorpdfstring{$t\bar{t}H$}{ttH} Analysis}
+Before this analysis was run on the new LQ signal samples, we chose to run the analysis with some $t\bar{t}H$ samples as the signal in order to test that the pipeline was working. This still very helpful, as $t\bar{t}H$ analysis has not been done yet with the new Rel.22 ntuples.
+
+The entire process involved a lot of trail and error, as the code that was provided to do the analysis had been made for Rel. 21 samples, and there are considerable differences between the two. For instance, a non-neglible portion of the branches in the ntuples had been completely removed or renamed. Appendix~\ref{MissingBranches} contains sections with the missing features/branches relevent for the different parts of the analysis. Only a handful were renamed, most were deleted. As such, the following analysis is meant only as a preliminary test, almost a proof-of-concept. 
+
+\subsubsection{Pre-fit Yields and Small Ntuples}
+    Before starting any major data processing, it is helpful to know the raw number of events we have, as well as how many we have in the signal region, the $2\ell\ell SS + 1\tau$ region. To do this, we need to modify the selection TRExFitter uses to incorporate all the criteria we want. The full selection string we used is:
+
+    \begin{minted}[breaklines]{cfg}
+        Selection: XXX_2LSS_SELECTION && XXX_LEPTON_PROMPT_SELECTION && XXX_EXCLUSION_Z_PEAK && XXX_TRIGGER_SELECTION && sumPsbtag85 > 5
+    \end{minted}
+
+    The variables starting with ``XXX'' are found in a \mintinline{cfg}{replacement.txt} file as they are often quite long, but their contents are largely self-explanatory given their names. The variable \mintinline{cfg}{XXX_2LSS_SELECTION} ensures that there are two leptons of the same sign in the final state, as well as ensuring that there is a hadronically decaying tau. 
+
+    \mintinline{cfg}{XXX_LEPTON_PROMPT_SELECTION} and \mintinline{cfg}{XXX_EXCLUSION_Z_PEAK} provide some kinetmatic constraints, with the latter ensuring that the invariant mass of the two leading leptons is not close to the Z resonance peak; it's definition is given by
+
+    \begin{minted}{cfg}
+        XXX_EXCLUSION_Z_PEAK: (abs(Mll01-91.2e3)>10e3)
+    \end{minted}
+
+    Lastly, the variable \mintinline{cfg}{sumPsbtag85} is a measure of btagging. Many $t\bar{t}$ events have relatively low numbers of b-jets, so making this cut helps remove that background.
+
+
+    Additionally, weights are applied in order to give prevalance to samples that are perhaps underrepresented. The criteria for the weights involves the run year and sample number for many of the obscure samples, but the specifics themselves are not particularly important. It also serves to skim down samples that are overrepresented.
+
+    As mentioned before, this process of making the selection and weight criteria was challenging due to the missing branches. For instance,one of the main groups of missing branches is the Prompt Lepton Veto (PLV) branches, which are helpful in determining fakes.\footnote{\mintinline{cfg}{XXX_LEPTON_PROMPT_SELECTION} is meant to contain, in addition to the aforementioned kinematic cuts, these PLV selections.} The list of branches that had to be removed from the selection criteria is given in List~\ref{preselectMissingFeatures}.
+
+    \begin{table}[ht!]
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Sample & Before Selection/Weight & After Selection/Weight \\ \hline
+            $t\bar{t}H$ & 785.2 & 17.8 \\ \hline
+            $t\bar{t}W$ & 2524.5 & 30.3 \\ \hline
+            $t\bar{t}Z(Z/\gamma*)$ & 2116.6 & 14.0 \\ \hline
+            $t\bar{t}$ & 47738.8 & 61.8 \\ \hline
+            $VV$ & 74970.7 & 1.3 \\ \hline
+            Others & 508810.8 & 5.6 \\ \hline\hline
+            Totals & 636946.6 & 130.7 \\ \hline
+        \end{tabular}
+        \caption{Pre-fit yields for $t\bar{t}H$ signal and background ntuples before and after the signal region selection criteria was applied and with weighting.}
+        \label{tthPreFitYields}
+    \end{table}
+
+    Now that the selection and weighting criteria have been established, we can apply it and run TRExFitter to determine yields. Table~\ref{tthPreFitYields} shows these. We can also produce some simple distributions for the regions we want to examine, such at the tau $p_T$ or the leading lepton $p_T$. Those plots are given in Figure~\ref{tauAndLeadingLepPt}. Some more of the 
+
+    \import{./res/Figures}{tauAndLeadingLepPt.tex}
+
+    
+
+    Lastly, To create the small ntuples, we skim through the raw ntuples and filter out events that don't pass our selection, essentially getting rid of all the uninteresting events. This is done with a simple script that is parallelized using HTCondor. Otherwise, if it is ran just on an ordinary \mintinline{bash}{lxplus} node, it will not only take forever but also probably be killed.
+
+
+\subsubsection{Model Training and Friend Ntuples}
+    We will use PyTorch to train our machine learning model, and since PyTorch cannot read ROOT files out of the box, we must transform all of our small ntuples into numpy arrays, which can then be read into PyTorch. This is also takes a long time, and is done by submitting an HTCondor job. The actual contents of the script itself are not important, only that it translates the data into PyTorch-readable format. Once this is complete, we can choose our model to train on the data. For simplicity and speed due to time constraints, we chose one of the simplest models, the ResNet-6. For information on how it works, see Ref~\cite{resnet}, for instance.
+
+    The model was trained on a large number of features. Just as with the previous step, in which there were a number of missing branches that had to be taken into account in forming the selection criteria, there were a number of training features that were missing in this stage. The full list of these features is given in List~\ref{trainMissingFeatures}. The model itself trained relatively quickly on a local machine with 16 GB of ram and an NVIDIA RTX 4050. Figure~\ref{rocSignalAndBackground} contains the R.O.C. curves for classification of events as $t\bar{t}H$ (signal) and $t\bar{t}W$, the most important background.
+
+    \import{./res/Figures}{rocSignalAndBackground.tex}
+
+    The next step is to produce the friend ntuples, which contain a single branch that gives the probabilities for events to be classified as $t\bar{t}H$. This is the alternative to copying the ntuples and simply adding the branch to the existing files, which saves space. All that needs to be done to produce the ntuples is to pass the small ntuples into the network and save the output; these are the friend ntuples.
+
+
+
+\subsection{Probability Distributions and Statistical Uncertainties}
+    With the friend ntuples created, we can now run TRExFitter again to produce probability distributions and other plots related to the statistical uncertainties. This is done by passing a few extra flags into the run command for TRExFitter, as well as adding another region to the configuration with the option \mintinline{cfg}{UseFriend: True}. After doing this, we get a plot like that shown in Figure~\ref{probsttH}. 
+
+    \import{./res/Figures}{probsttH.tex}

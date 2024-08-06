@@ -1,4 +1,3 @@
-
 \section{Methodology}\label{methodology}
     As this is a novel production method, there are a number of steps we must take in order to begin analyzing this process. We will rely heavily/entirely on the ATLAS experiment's Athena software, which contains a number of helpful tools and wrappers around popular event generators, simulators, and reconstruction algorithms. There are three main steps for the production of the signal in the ATLAS experiment: testing and production of validation plots, approval from subgroup conveners, and submission of a ticket to generate events on the grid.
 
@@ -11,7 +10,7 @@
 
         Once the TRUTH derivations have been made, we can then apply a simple analysis using Athena's EventLoop framework, which is a tool that let's one easily parse through xAOD files and extract relevant information. Inside this analysis program, we can grab all of the kinematics for all of the final state particles, including the LQ's and their intermediate decay products. All that remains is to use ROOT to place them into histograms, which is a trivial exercise. Four example validation plots are shown in ~\ref{validationPlots}.
         
-        \begin{figure}[hb!]
+        \begin{figure}[ht]
             \centering
             
             \includegraphics[scale=0.2]{res/ValidationPlots/h_pt_tau.png}
