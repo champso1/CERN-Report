@@ -1,3 +1,13 @@
+# any (gzipped) tarballs
 *.gz
+
+# all latex files
 _minted-*
 *.bbl
+*.aux
+*.blg
+*.fdb_latexmk
+*.out
+*.fls
+*.log
+*.toc

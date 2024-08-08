@@ -85,3 +85,15 @@
         \item \textit{taus\_passJVT\_0}
     \end{itemize}
     \end{multicols}
+
+
+
+
+\section{Full Pre-Selection and Weight Criteria Strings}\label{fullSelectionAndWeightStrings}
+    \begin{minted}[breaklines]{cfg}
+        Selection: l2SS_1tau && ((lep_Pt_0>=10e3 && lep_Pt_1>=10e3)&&(fabs(lep_Eta_0)<=2.5&&fabs(lep_Eta_1)<=2.5) && ((abs(lep_ID_0) == 13 && lep_isMedium_0 && lep_Iso_Loose_VarRad_0) || (abs(lep_ID_0) == 11 && lep_isTightLH_0 && lep_Iso_Loose_VarRad_0 && lep_ambiguityType_0 == 0)) && ((abs(lep_ID_1) == 13 && lep_isMedium_1 && lep_Iso_Loose_VarRad_1) || (abs(lep_ID_1) == 11 && lep_isTightLH_1 && lep_Iso_Loose_VarRad_1 && lep_ambiguityType_1 == 0))) && ((abs(lep_ID_0)==11 && lep_isTightLH_0) || (abs(lep_ID_0)==13 && lep_isMedium_0)) && ((abs(lep_ID_1)==11 && lep_isTightLH_1) || (abs(lep_ID_1)==13 && lep_isMedium_1)) && (abs(Mll01-91.2e3)>10e3) && custTrigMatch_CombinedWPs_SLTorDLT && (sumPsbtag85 > 5)
+    \end{minted}
+
+    \begin{minted}[breaklines]{cfg}
+        XXX_MC_WEIGHT: ((36207.66*(RunYear==2015 || RunYear==2016) + 44307.4*(RunYear==2017) + 58450.1*(RunYear==2018))*(1/138965.16) * weight_pileup * weight_mc * xs/totalEventsWeighted)
+    \end{minted}

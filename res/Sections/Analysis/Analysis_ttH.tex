@@ -1,52 +1,55 @@
-\subsection{\texorpdfstring{$t\bar{t}H$}{ttH} Analysis}
-Before this analysis was run on the new LQ signal samples, we chose to run the analysis with some $t\bar{t}H$ samples as the signal in order to test that the pipeline was working. This still very helpful, as $t\bar{t}H$ analysis has not been done yet with the new Rel.22 ntuples.
+\subsection{\texorpdfstring{$t\bar{t}H$}{ttH} Analysis in the \texorpdfstring{$2\ell SS + 1\tau$}{2lSS+1tau} Channel}
+Previous analysis for the $2\ell SS + 1\tau$ channel had been done using release (Rel.) 21 ntuples, but the current release is now Rel.22. There are numerous differences between the different releases, such as different variables, different algorithms to produce those variables, general data quality, and more. Most notable are the different variables, as things like weights and selection criteria often need to be significantly changed due to variables that are renamed or no longer present. We briefly summarize some more details with the branch changes in Section~\ref{branchChanges}. 
 
-The entire process involved a lot of trail and error, as the code that was provided to do the analysis had been made for Rel. 21 samples, and there are considerable differences between the two. For instance, a non-neglible portion of the branches in the ntuples had been completely removed or renamed. Appendix~\ref{MissingBranches} contains sections with the missing features/branches relevent for the different parts of the analysis. Only a handful were renamed, most were deleted. As such, the following analysis is meant only as a preliminary test, almost a proof-of-concept. 
+Our main task here is to port the Rel.21 code to be compatible with the Rel.22 data. From there, while waiting for the LQ samples to be produced, we can rerun the previous $t\bar{t}H$ analysis to make some comparisons and check the quality of both the new data and the modified code. It is also a good start for further $t\bar{t}H$ analysis in this release.
+
+
+\subsubsection{Branch Changes from Rel.21 to Rel.22}\label{branchChanges}
+    Not only was the previous analysis using Rel.21 ntuples, but there were a few variables present in the ntuples that had been custom-made specifically for Higgs multi-lepton analysis. There were a good number of these variables that had to be removed from the selection criteria, as well as from the feature list that was fed into the machine learning model. A full list of all the branches that were present and used in the Rel.21 analysis but not present in the Rel.22 analysis is given in Section~\ref{MissingBranches}. Note that this list contains all variables that were not themselves present, but it is possible some of them were able to be renamed or easily replaced. For instance, we were able to make the following replacement:
+
+    \vspace*{2mm}
+    \begin{center}
+        \textit{lep\_isolationLoose\_VarRad\_X} $\rightarrow$ \textit{lep\_Iso\_Loose\_VarRad\_X}
+    \end{center}
+    \vspace*{2mm}
+
+    where $X=0,1$, among a few others. 
+
+    Further, there were a number of prompt lepton veto (PLV) variables that were completely removed. Prompt versus non-prompt leptons are those that emerge from the vertex of interest as opposed to one that emerges from some secondary vertex as a result of the decay of some heavy intermediary particle like a $W^{\pm}$ or $Z$ boson that is irrelevent for the study. It is very useful to be able to remove the non-prompt leptons. These PLV variables are in the process of development from the IFF group, which is attempting to unify the efforts towards prompt and fake lepton classification across many of the analysis groups. As a result, there is not much availability for these classifications as of now.
 
 \subsubsection{Pre-fit Yields and Small Ntuples}
-    Before starting any major data processing, it is helpful to know the raw number of events we have, as well as how many we have in the signal region, the $2\ell\ell SS + 1\tau$ region. To do this, we need to modify the selection TRExFitter uses to incorporate all the criteria we want. The full selection string we used is:
+    Before starting any major data processing, it is helpful to know the raw number of events we have, as well as how many we have in the signal region, the $2\ell SS + 1\tau$ region. To do this, we need to modify the selection TRExFitter uses to incorporate all the criteria we want. The full selection string we used is:
 
     \begin{minted}[breaklines]{cfg}
         Selection: XXX_2LSS_SELECTION && XXX_LEPTON_PROMPT_SELECTION && XXX_EXCLUSION_Z_PEAK && XXX_TRIGGER_SELECTION && sumPsbtag85 > 5
     \end{minted}
 
-    The variables starting with ``XXX'' are found in a \mintinline{cfg}{replacement.txt} file as they are often quite long, but their contents are largely self-explanatory given their names. The variable \mintinline{cfg}{XXX_2LSS_SELECTION} ensures that there are two leptons of the same sign in the final state, as well as ensuring that there is a hadronically decaying tau. 
+    The variables starting with ``XXX'' are found in a \mintinline{cfg}{replacement.txt} file as they are often quite long, but their contents are largely self-explanatory given their names. The variable \mintinline{cfg}{XXX_2LSS_SELECTION} ensures that there are two leptons of the same sign in the final state, as well as ensuring that there is a hadronically decaying tau.  \mintinline{cfg}{XXX_EXCLUSION_Z_PEAK} provides some additional kinematic constraints by ensuring that the invariant mass of the two leading leptons is not close to the Z resonance peak. \mintinline{cfg}{XXX_LEPTON_PROMPT_SELECTION} used to contain a number of PLV variables to remove non-prompt leptons as well as some other generic identification variables. While those had to be removed, there remained still some useful variables in this bit of the selection, such as \textit{lep\_ambiguityType\_X}, which assists in a different but still slightly related method of lepton identification.  Lastly, the variable \mintinline{cfg}{sumPsbtag85} is a measure of btagging. Many $t\bar{t}$ events have relatively low numbers of b-jets, so making this cut helps remove that background. 
+    
+    On top of this pre-selection, we also apply a set of weights. Often times, in a simulation, the algorithms and whatnot are not perfect, leading to certain processes being underrepresented compared to how they would be in a real experiment. As a result, we apply these weights to try and match as closely to experiment as possible. This criteria involves things like run years, as well as certain sample numbers. The full criteria for the weight and the pre-selection is given in Appendix~\ref{fullSelectionAndWeightStrings}.
 
-    \mintinline{cfg}{XXX_LEPTON_PROMPT_SELECTION} and \mintinline{cfg}{XXX_EXCLUSION_Z_PEAK} provide some kinetmatic constraints, with the latter ensuring that the invariant mass of the two leading leptons is not close to the Z resonance peak; it's definition is given by
-
-    \begin{minted}{cfg}
-        XXX_EXCLUSION_Z_PEAK: (abs(Mll01-91.2e3)>10e3)
-    \end{minted}
-
-    Lastly, the variable \mintinline{cfg}{sumPsbtag85} is a measure of btagging. Many $t\bar{t}$ events have relatively low numbers of b-jets, so making this cut helps remove that background.
-
-
-    Additionally, weights are applied in order to give prevalance to samples that are perhaps underrepresented. The criteria for the weights involves the run year and sample number for many of the obscure samples, but the specifics themselves are not particularly important. It also serves to skim down samples that are overrepresented.
-
-    As mentioned before, this process of making the selection and weight criteria was challenging due to the missing branches. For instance,one of the main groups of missing branches is the Prompt Lepton Veto (PLV) branches, which are helpful in determining fakes.\footnote{\mintinline{cfg}{XXX_LEPTON_PROMPT_SELECTION} is meant to contain, in addition to the aforementioned kinematic cuts, these PLV selections.} The list of branches that had to be removed from the selection criteria is given in List~\ref{preselectMissingFeatures}.
 
     \begin{table}[ht!]
         \centering
-        \begin{tabular}{|c|c|c|}
+        \begin{tabular}{|c|c|c|c|c|}
             \hline
-            Sample & Before Selection/Weight & After Selection/Weight \\ \hline
-            $t\bar{t}H$ & 785.2 & 17.8 \\ \hline
-            $t\bar{t}W$ & 2524.5 & 30.3 \\ \hline
-            $t\bar{t}Z(Z/\gamma*)$ & 2116.6 & 14.0 \\ \hline
-            $t\bar{t}$ & 47738.8 & 61.8 \\ \hline
-            $VV$ & 74970.7 & 1.3 \\ \hline
-            Others & 508810.8 & 5.6 \\ \hline\hline
-            Totals & 636946.6 & 130.7 \\ \hline
+             & \multicolumn{2}{c|}{Non-weighted} & \multicolumn{2}{c|}{Weighted} \\ \hline 
+            Sample & Before Selection & After Selection & Before Selection & After Selection \\ \hline
+            $t\bar{t}H$ & 1015311 & 23037 & 785.2 & 17.8 \\ \hline
+            $t\bar{t}W$ & 902540 & 10759 & 2524.5 & 30.3 \\ \hline
+            $t\bar{t}Z(Z/\gamma*)$ & 2164697 & 14500 & 2116.6 & 14.0 \\ \hline
+            $t\bar{t}$ & 350927 & 457 & 47738.8 & 61.8 \\ \hline
+            $VV$ & 17373668 & 566 & 74970.7 & 1.3 \\ \hline
+            Others & 4148134 & 1329 & 508810.8 & 5.6 \\ \hline\hline
+            Totals & 25955277 & 50648 & 636946.6 & 130.7 \\ \hline
         \end{tabular}
-        \caption{Pre-fit yields for $t\bar{t}H$ signal and background ntuples before and after the signal region selection criteria was applied and with weighting.}
-        \label{tthPreFitYields}
+        \caption{The yields for all the sample regions before and after selection, with and without weighting.}
+        \label{allYields}
     \end{table}
 
-    Now that the selection and weighting criteria have been established, we can apply it and run TRExFitter to determine yields. Table~\ref{tthPreFitYields} shows these. We can also produce some simple distributions for the regions we want to examine, such at the tau $p_T$ or the leading lepton $p_T$. Those plots are given in Figure~\ref{tauAndLeadingLepPt}. Some additional plots are also given in Section~\ref{additionalValidationPlots}
+    Now that the selection and weighting criteria have been established, we can apply it and run TRExFitter to determine yields for all of our sample regions. Table~\ref{allYields} shows these, listing the yields for the samples before and after the pre-selection and weighting. We can also produce some simple distributions for the regions we want to examine, such as the leading lepton $p_T$ or the number of jets. Those plots are given in Figure~\ref{leadingLepPtAndNumJets}. The full set of the validation plots are given in Section~\ref{additionalValidationPlots}.
 
-    \import{./res/Figures}{tauAndLeadingLepPt.tex}
-
-    
+    \import{./res/Figures}{leadingLepPtAndNumJets.tex}
 
     Lastly, To create the small ntuples, we skim through the raw ntuples and filter out events that don't pass our selection, essentially getting rid of all the uninteresting events. This is done with a simple script that is parallelized using HTCondor. Otherwise, if it is ran just on an ordinary \mintinline{bash}{lxplus} node, it will not only take forever but also probably be killed.
 
@@ -62,7 +65,11 @@ The entire process involved a lot of trail and error, as the code that was provi
 
 
 
-\subsection{Probability Distributions and Statistical Uncertainties}
-    With the friend ntuples created, we can now run TRExFitter again to produce probability distributions and other plots related to the statistical uncertainties. This is done by passing a few extra flags into the run command for TRExFitter, as well as adding another region to the configuration with the option \mintinline{cfg}{UseFriend: True}. After doing this, we get a plot like that shown in Figure~\ref{probsttH}. 
+    \subsection{Probability Distributions and Statistical Uncertainties}
+    With the friend ntuples created, we can now run TRExFitter again to produce probability distributions and other plots related to the statistical uncertainties. This is done by passing a few extra flags into the run command for TRExFitter, as well as adding another region to the configuration with the option \mintinline{cfg}{UseFriend: True}. After doing this, we get a plot like that shown in Figure~\ref{probsttH}.
 
     \import{./res/Figures}{probsttH.tex}
+
+    There are a number of things to note. First of all, the $t\bar{t}$ background that was unusually prominent in the previous validations plots appears to separate very easily as it completely disappears after the first two bins, which is a very good sign. Additionally, and perhaps most importantly, it is quite clear that the $t\bar{t}H$ has been very nicely separated. To more closely analyze how well our model performed, we can make a simple measure of the statistical uncertainly associated with the significance of the model classification. This is shown in Figure~\ref{normFactors}. Also in the figure is the output from the Rel.21 analysis~\cite{Yazykov}, and we can immediately see that the new ntuples, even with the reduced criteria and simpler model, preform very well, even better than the previous analysis.
+
+    \import{./res/Figures}{normFactors.tex}
